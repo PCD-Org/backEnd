@@ -8,8 +8,8 @@ const isProduction = config.env === "production";
 
 const baseCookieOptions = {
   httpOnly: true,
-  secure: isProduction,
-  sameSite: "lax",
+  secure: true,
+  sameSite: "none",
 };
 
 class AuthController {
@@ -22,11 +22,6 @@ class AuthController {
       });
 
       // Set Access Token cookie — maxAge aligned to JWT expiry
-      res.cookie("accessToken", accessToken, {
-        ...baseCookieOptions,
-        maxAge: parseDurationMs(config.jwt.accessExpiresIn),
-      });
-
       res.cookie("accessToken", accessToken, {
         ...baseCookieOptions,
         maxAge: parseDurationMs(config.jwt.accessExpiresIn),

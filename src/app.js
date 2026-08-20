@@ -22,7 +22,14 @@ app.use(helmet());
 
 // Enable CORS
 app.use(cors({
-  origin: config.cors.origin,
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (config.cors.origins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 
