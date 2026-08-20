@@ -43,7 +43,13 @@ app.get('/api/v1/health', (req, res) => {
     message: 'PCED Backend API is running smoothly.',
   });
 });
-
+//! this is test 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'success',
+    message: 'Welcome to the API!'
+  });
+});
 // Placeholder for future routes
 app.use('/api/v1/activities', activityRoutes);
 app.use('/api/v1/impact-statistics', impactStatisticRoutes);
